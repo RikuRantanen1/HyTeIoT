@@ -1,60 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Chart from "react-google-charts";
 
 
 function App() {
+
+  const initWeather = [];
+
+  const [weather, setWeather] = useState(initWeather);
+
+  fetch('https://oppilas-5.azurewebsites.net/api/HttpTriggerCSharp2?code=9Ii7LRHZamJjN9KpyStW1VZfWYcpBmHQQ/PQaZQF4VMEbBYBeP38pQ==&deviceId=2c0031001947393035313138&amount=10')
+    .then(response => response.json())
+    .then (json => setWeather([...json]));
+
+  let humtempkey = 1;
+  const rows = () => weather.map(temphum => {
+    return <div key={humtempkey++}> 
+    <b>Klo</b> {temphum.Timestamp} <b>lämpötila</b> {temphum.Temp} <b>Ilmankosteus</b> {temphum.Hum} 
+    </div>
+  })
+
+
   return (
     <div className="App">
-      <div style={{ display: 'flex', maxWidth: 900 }}>
+      {rows()}
+      <div>
   <Chart
-    width={800}
+    width={1000}
     height={300}
     chartType="ColumnChart"
     loader={<div>Loading Chart</div>}
     data={[
-      ['City', '2010 Population',],
-      ['New York City, NY', 8175000],
-      ['Los Angeles, CA', 3792000],
-      ['Chicago, IL', 2695000],
-      ['Houston, TX', 2099000],
-      ['Philadelphia, PA', 1526000],
+      ['Aika', '%',],
+      ['10:00', 40],
+      ['11:00', 43],
+      ['12:00', 20],
+      ['13:00', 33],
+      ['14:00', 38],
+      ['15:00', 15],
+      ['16:00', 44],
+      ['17:00', 55],
+      ['18:00', 40],
     ]}
     options={{
-      title: 'Population of Largest U.S. Cities',
-      chartArea: { width: '30%' },
+      title: 'Ilmankosteus',
+      
       hAxis: {
-        title: 'Total Population',
+        title: 'Mittausaika',
         minValue: 0,
       },
       vAxis: {
-        title: 'City',
+        title: '',
       },
     }}
-    legendToggle
+    
   />
   </div>
-  <div style={{ display: 'flex', maxWidth: 900 }}>
+  <div style={{ display: 'flex',}}>
 
   <Chart
-    width={800}
-    height={'300px'}
-    chartType="AreaChart"
+    width={1000}
+    height={300}
+    chartType="LineChart"
     loader={<div>Loading Chart</div>}
     data={[
-      ['Year', 'Sales', 'Expenses'],
-      ['2013', 1000, 400],
-      ['2014', 1170, 460],
-      ['2015', 660, 1120],
-      ['2016', 1030, 540],
+      ['Aika', 'Celsius'],
+      ['10:00', 10],
+      ['11:00', 11],
+      ['12:00', 18],
+      ['13:00', 19],
+      ['14:00', 22],
+      ['15:00', 22],
+      ['16:00', 19],
+      ['17:00', 18],
     ]}
     options={{
-      title: 'Company Performance',
-      hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+      title: 'Lämpötila',
       vAxis: { minValue: 0 },
-      // For the legend to fit, we make the chart area smaller
-      chartArea: { width: '50%', height: '70%' },
-      // lineWidth: 25
+      
     }}
   />
 </div>
