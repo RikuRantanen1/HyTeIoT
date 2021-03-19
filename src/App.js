@@ -9,16 +9,46 @@ function App() {
 
   const [weather, setWeather] = useState(initWeather);
 
+ function convertUTCDateToLocalDate(date) {
+  new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
+  return date;
+}
+
+let chartHumData = [
+      ['Aika', '%',],
+      ['Loading..', 0]
+     
+];
+let chartTempData = [
+      ['Aika', 'Celsius'],
+      ['Loading..', 0]
+      
+    ];
+
   fetch('https://oppilas-5.azurewebsites.net/api/HttpTriggerCSharp2?code=9Ii7LRHZamJjN9KpyStW1VZfWYcpBmHQQ/PQaZQF4VMEbBYBeP38pQ==&deviceId=2c0031001947393035313138&amount=10')
     .then(response => response.json())
     .then (json => setWeather([...json]));
 
   let humtempkey = 1;
   const rows = () => weather.map(temphum => {
+
+    if(chartHumData[1][0] === 'Loading..'){
+      chartHumData.pop();
+    }
+     if(chartTempData[1][0] === 'Loading..'){
+      chartTempData.pop();
+    }
+
+    chartHumData.push([String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4], parseInt(temphum.Hum)])
+
+    chartTempData.push([String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4], parseInt(temphum.Temp)])
+    
     return <div key={humtempkey++}> 
-    <b>Klo</b> {temphum.Timestamp} <b>lämpötila</b> {temphum.Temp} <b>Ilmankosteus</b> {temphum.Hum} 
+    
+    <b>Klo</b> {String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4]} <b>Lämpötila</b> {temphum.Temp}°C <b>Ilmankosteus</b> {temphum.Hum}% 
     </div>
   })
+  
 
 
   return (
@@ -30,18 +60,7 @@ function App() {
     height={300}
     chartType="ColumnChart"
     loader={<div>Loading Chart</div>}
-    data={[
-      ['Aika', '%',],
-      ['10:00', 40],
-      ['11:00', 43],
-      ['12:00', 20],
-      ['13:00', 33],
-      ['14:00', 38],
-      ['15:00', 15],
-      ['16:00', 44],
-      ['17:00', 55],
-      ['18:00', 40],
-    ]}
+    data={chartHumData}
     options={{
       title: 'Ilmankosteus',
       
@@ -63,17 +82,7 @@ function App() {
     height={300}
     chartType="LineChart"
     loader={<div>Loading Chart</div>}
-    data={[
-      ['Aika', 'Celsius'],
-      ['10:00', 10],
-      ['11:00', 11],
-      ['12:00', 18],
-      ['13:00', 19],
-      ['14:00', 22],
-      ['15:00', 22],
-      ['16:00', 19],
-      ['17:00', 18],
-    ]}
+    data={chartTempData}
     options={{
       title: 'Lämpötila',
       vAxis: { minValue: 0 },
