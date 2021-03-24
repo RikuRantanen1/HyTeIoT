@@ -9,6 +9,9 @@
   Voidaan valvoa ja hallita kiinteistöä etänä. Sillä voidaan automatisoida toimintoja, esimerkiksi sulkea vedentulo vesivahingon sattuessa, valvoa ilmankosteutta tai vaikkapa säätää lämpötiloja.
 
 ## Sääasemajärjestelmän toimintakaavio
+### Kuva sääaseman rakenteesta
+
+  ![sää-asema](/Kaavio.png)
   ### IoT-järjestelmän rakenne:
 
 - Anturit
@@ -23,9 +26,7 @@
 - Analytiikka
     Tallennettu data hyödynnetään
 
-## Kuva sääaseman rakenteesta
 
-  ![alt text](/Kaavio.png)
 	
 
   ### Laitteistot

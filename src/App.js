@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Chart from "react-google-charts";
-
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 
 function App() {
 
@@ -53,17 +54,21 @@ let chartTempData = [
 
   return (
     <div className="App">
+    <Header />
+    
+    
       {rows()}
       <div>
   <Chart
-    width={1000}
+    
+    width={'100%'}
     height={300}
     chartType="ColumnChart"
     loader={<div>Loading Chart</div>}
     data={chartHumData}
     options={{
       title: 'Ilmankosteus',
-      
+      chartArea: { width: '50%' },
       hAxis: {
         title: 'Mittausaika',
         minValue: 0,
@@ -78,20 +83,24 @@ let chartTempData = [
   <div style={{ display: 'flex',}}>
 
   <Chart
-    width={1000}
+    width={'100%'}
     height={300}
     chartType="LineChart"
     loader={<div>Loading Chart</div>}
     data={chartTempData}
     options={{
+      chartArea: { width: '50%' },
       title: 'Lämpötila',
       vAxis: { minValue: 0 },
       
     }}
   />
+  <Footer />
 </div>
     </div>
+    
   );
+  
 }
 
 export default App;
