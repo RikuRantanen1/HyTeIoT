@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
     return (
       <footer style={footerstyle}>
-          <h3>R.R</h3>
+          <h3>&copy; R.R</h3>
           </footer>
     )
 }

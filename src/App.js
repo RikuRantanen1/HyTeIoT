@@ -3,6 +3,9 @@ import './App.css';
 import Chart from "react-google-charts";
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import Portfolio from './components/Portfolio';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 function App() {
 
@@ -53,9 +56,14 @@ let chartTempData = [
 
 
   return (
+  <Router>
     <div className="App">
-    <Header />
-    
+      <Header />
+        <Switch>
+        <Route path="/portfolio">
+          <Portfolio />
+        </Route>
+        <Route path="/">
     
       {rows()}
       <div>
@@ -95,9 +103,13 @@ let chartTempData = [
       
     }}
   />
+  </div>
+  </Route>
+  </Switch>
   <Footer />
-</div>
-    </div>
+    
+  </div>
+</Router>
     
   );
   
