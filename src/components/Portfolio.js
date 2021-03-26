@@ -2,9 +2,10 @@ import React from 'react';
 
 function Portfolio(){
   return(
-    <div>
-    portfoliotekstiä
-    </div>
+  <div>
+  
+  <img src="meme.jpg" alt="" />
+  </div>  
   )
 }
 

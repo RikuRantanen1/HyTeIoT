@@ -7,6 +7,7 @@ import Portfolio from './components/Portfolio';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
+
 function App() {
 
   const initWeather = [];
@@ -58,6 +59,7 @@ let chartTempData = [
   return (
   <Router>
     <div className="App">
+    
       <Header />
         <Switch>
         <Route path="/portfolio">
@@ -68,7 +70,6 @@ let chartTempData = [
       {rows()}
       <div>
   <Chart
-    
     width={'100%'}
     height={300}
     chartType="ColumnChart"
