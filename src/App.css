@@ -1,7 +1,18 @@
 .App {
+  background: cyan;
+  
   text-align: center;
 }
+.kaavio {
 
+  border: 5px solid cyan;
+  
+}
+.kaavio2 {
+
+  border: 5px solid cyan;
+  
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

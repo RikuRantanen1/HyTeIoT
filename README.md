@@ -31,6 +31,30 @@
 
   ### Laitteistot
   ### Komponentit
+    Kuulevat sensorit.
+    Voidaan tunistaa ja tallentaa ääniä,esim aseen ääni,sanallinen agressio jne. Uhkaavista äänistä voi antaa hälytyksen/varoituksen vartialle esimerkiksi vankilassa. 
+    Hoivakodissa voidaan mikrofonilla seurata esim unenlaatua.
+    Eleintarhassa melusensori mittaa melutasoa.
+    Kaupungeissa samaa + liikennelaskenta tietoa.
+    Ilmastointilaitteen toimintaa voitaisiin myös seurata.
+  
+    Tuntevat sensorit:
+    Tuntevat sensorit voivat aistia esimerkiksi lämpöä,liikettä,valoisuutta ja kosteutta.
+    kosteussenrorilla voi mitata ja huomata talon rakentaissa kosteusvauriot ja antaa varoituksia suoraan kättäjälle.
+    Liikesensorilla voidaan seurata esimerkiksi rahtikontteja.
+    Lämpötila mittauksilla voidaan seurata kylmäketjuja tai vaikka talon lämptilaa ja automatisoida lämmön säätely.
+    Valosensoreilla voidaan mitata vaikka huoneen valoisuutta ja automatisoida esim lamppujen toimintaa.
+
+    Haistavat sensorit:
+    Haistavilla sensoreilla voidaan tehdä ilmanlaadun mittauksia tai vaikkapa pakokaasumittauksia.
+    Lääketieteessä voidaan haistavia sensoreita käyttää diagnisointi työkaluna. Hengitystä "haistelemalla" voidaan todentaa useita sairauksia.
+    
+
+
+
+
+    
+
   ### Palvelut
   ### Ohjelmointi
   ### Toiminta
@@ -41,5 +65,4 @@
 
 ## Viitteet
 https://www.empirica.fi/iot/
-
-  
+https://www.dna.fi/yrityksille/aistien-internet-podcast

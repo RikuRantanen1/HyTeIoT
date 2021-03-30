@@ -4,6 +4,7 @@ import Chart from "react-google-charts";
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Portfolio from './components/Portfolio';
+import Toivomukset from './components/Toivomukset';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -62,13 +63,16 @@ let chartTempData = [
     
       <Header />
         <Switch>
+        <Route path="/Toivomukset">
+        <Toivomukset />
+        </Route> 
         <Route path="/portfolio">
           <Portfolio />
         </Route>
         <Route path="/">
     
       {rows()}
-      <div>
+      <div className="kaavio">
   <Chart
     width={'100%'}
     height={300}
@@ -89,7 +93,7 @@ let chartTempData = [
     
   />
   </div>
-  <div style={{ display: 'flex',}}>
+  <div className="kaavio2">
 
   <Chart
     width={'100%'}
@@ -105,6 +109,7 @@ let chartTempData = [
     }}
   />
   </div>
+  
   </Route>
   </Switch>
   <Footer />

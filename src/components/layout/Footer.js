@@ -3,17 +3,19 @@ import React from 'react';
 function Footer() {
     return (
       <footer style={footerstyle}>
+      <div>
           <h3>&copy; R.R</h3>
+          </div>
           </footer>
     )
 }
 
 const footerstyle = {
  
-  background: '#333333',
+  background: '#0000FF',
   color: '#ffffff',
   textAling: 'center',
-  padding: '10px',
+  padding: '0px',
   position: 'fixed',
   bottom: '0px',
   width: '100%'
