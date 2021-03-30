@@ -31,24 +31,38 @@
 
   ### Laitteistot
   ### Komponentit
-    Kuulevat sensorit.
-    Voidaan tunistaa ja tallentaa ääniä,esim aseen ääni,sanallinen agressio jne. Uhkaavista äänistä voi antaa hälytyksen/varoituksen vartialle esimerkiksi vankilassa. 
-    Hoivakodissa voidaan mikrofonilla seurata esim unenlaatua.
-    Eleintarhassa melusensori mittaa melutasoa.
-    Kaupungeissa samaa + liikennelaskenta tietoa.
-    Ilmastointilaitteen toimintaa voitaisiin myös seurata.
+  Kuulevat sensorit.
+  Toiminta perustuu ilmanpaineen vaihteluun.
+  Voidaan tunistaa ja tallentaa ääniä,esim aseen ääni,sanallinen agressio jne. Uhkaavista äänistä voi antaa hälytyksen/varoituksen vartialle esimerkiksi vankilassa. 
+  Hoivakodissa voidaan mikrofonilla seurata esim unenlaatua.
+  Eleintarhassa melusensori mittaa melutasoa.
+  K Ilmastointilaitteen toimintaa voitaisiin myös seurata ääntä analysoimalla.
   
-    Tuntevat sensorit:
-    Tuntevat sensorit voivat aistia esimerkiksi lämpöä,liikettä,valoisuutta ja kosteutta.
-    kosteussenrorilla voi mitata ja huomata talon rakentaissa kosteusvauriot ja antaa varoituksia suoraan kättäjälle.
-    Liikesensorilla voidaan seurata esimerkiksi rahtikontteja.
-    Lämpötila mittauksilla voidaan seurata kylmäketjuja tai vaikka talon lämptilaa ja automatisoida lämmön säätely.
-    Valosensoreilla voidaan mitata vaikka huoneen valoisuutta ja automatisoida esim lamppujen toimintaa.
+  Tuntevat sensorit:
+  Tuntevat sensorit voivat aistia esimerkiksi lämpöä,liikettä,valoisuutta ja kosteutta.
+  kosteussenrorilla voi mitata ja huomata talon rakentaissa kosteusvauriot ja antaa varoituksia suoraan kättäjälle.
+  Liikesensorilla voidaan seurata esimerkiksi rahtikontteja.
+  Lämpötila mittauksilla voidaan seurata kylmäketjuja tai vaikka talon lämptilaa ja automatisoida lämmön säätely.
+  Valosensoreilla voidaan mitata vaikka huoneen valoisuutta ja automatisoida esim lamppujen toimintaa.
 
-    Haistavat sensorit:
-    Haistavilla sensoreilla voidaan tehdä ilmanlaadun mittauksia tai vaikkapa pakokaasumittauksia.
-    Lääketieteessä voidaan haistavia sensoreita käyttää diagnisointi työkaluna. Hengitystä "haistelemalla" voidaan todentaa useita sairauksia.
-    
+  Haistavat sensorit:
+  Haistavilla sensoreilla voidaan tehdä ilmanlaadun mittauksia tai vaikkapa pakokaasumittauksia.
+  Lääketieteessä voidaan haistavia sensoreita käyttää diagnisointi työkaluna. Hengitystä "haistelemalla" voidaan todentaa useita sairauksia.
+
+  Näkevät sensorit: 
+  Perustuu valon ja värien mittaamiseen.
+  Liiketunnistimella voidaan automatisoida valoja.
+  Kameraa ja tekoälyä voidaan käyttää tuotantolinjoissa laadunvalvonnassa tai vaikkapa seurata/mitata rahtikontin täyttöastetta.
+  Robotti-imurit käyttävät näkösensoreita ymmärtääkseen huoneen missä se toimii. 
+  Konenäkö on parhaimillaan erittäin tarkoissa mittaus hommissa jotka ihmissilmälle ei olisi mahdollista tai olisi aikaa vievää.
+
+  DHT-11 anturi:
+  ![dht-11](/Dht11.png)
+   DHT-anturit ovat yksinkertaisia ja edullisialämpötila-ja kosteusantureita. Niitä ei ole tarkoitettu tarkkoihin vaativiin mittaukseen, sillä ne eivät ole kovin nopeita ja tarkkoja, mutta soveltuvat moneen yksinkertaiseen mittaukseen. Sensoreissa on siru, joka muuntaa analogisen signaalin digitaaliseksi, jolloin dataa on helppo lukea miltei millä vain yhteensopivalla laitteella. 
+
+  dht-11 anturin kaavio:
+  ![dht-11 kaavio](/Hum-sch.png)
+
 
 
 
@@ -66,3 +80,4 @@
 ## Viitteet
 https://www.empirica.fi/iot/
 https://www.dna.fi/yrityksille/aistien-internet-podcast
+https://www.theseus.fi/bitstream/handle/10024/150796/Vuorela_Jonne.pdf?sequence=1&isAllowed=y

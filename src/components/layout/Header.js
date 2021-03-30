@@ -6,8 +6,8 @@ function Header() {
       <header style={headerstyle}>
          
            <h1>IoT Sääasema</h1>
-          <Link to="/" style={linkstyle}>Sääasema</Link>  <Link to="/portfolio" style={linkstyle}>Portfolio</Link>  <Link to="/Toivomukset" style={linkstyle}>Toivomukset</Link><p></p>
-          <a href="https://github.com/RikuRantanen1/HyTeIoT/blob/master/README.md" target="blank" rel="noopener norefferer">ReadMe</a>
+          <Link to="/" style={linkstyle}>Sääasema</Link>  <Link to="/portfolio" style={linkstyle}>Portfolio</Link>  <Link to="/Toivomukset" style={linkstyle}>Toivomuskaivo</Link><p></p>
+          <a style={linkstyle}href="https://github.com/RikuRantanen1/HyTeIoT/blob/master/README.md" target="blank" rel="noopener norefferer">ReadMe</a>
           </header>
     )
 }
