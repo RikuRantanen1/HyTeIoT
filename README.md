@@ -93,6 +93,7 @@
   ![particlekoodi](/pkoodi2.png)
 
 ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille 
+**HTTPTrigger1**
 
     #r "Newtonsoft.Json" 
     using System; 
@@ -133,6 +134,7 @@ ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille
     public string Temp { get; set; }
     }
 Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
+**HTTPTrigger2**
     
     #r "Newtonsoft.Json"
     #r "Microsoft.WindowsAzure.Storage"
@@ -186,6 +188,7 @@ Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa.
 ![Datastorage](/datastorage2.png)
 
 Käyttöliittymä tehtiin Reactilla Replit.com palvelussa
+**Käyttöliittymä**
 
     import React, { useState } from 'react';
     import './App.css';
