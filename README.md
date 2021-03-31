@@ -133,6 +133,55 @@ ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille
     public string Temp { get; set; }
     }
 Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
+    #r "Newtonsoft.Json"
+    #r "Microsoft.WindowsAzure.Storage"
+    using Microsoft.WindowsAzure.Storage.Table;
+    using System.Net;
+    using System.Text;
+    using Newtonsoft.Json;
+
+    public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, [Table("IoTData", "DeviceData")] IQueryable<IotData> inputTable, TraceWriter log)
+    { 
+    log.Info("C# HTTP trigger function processed a request.");
+    string amount = req.GetQueryNameValuePairs()
+    .FirstOrDefault(q => string.Compare(q.Key, "amount", true) == 0)
+    .Value;
+    int max = 0;
+    Int32.TryParse(amount, out max); //muutetaan amount integeriksi
+    log.Info("määrä: " + max);
+    string deviceId = req.GetQueryNameValuePairs()
+    .FirstOrDefault(q => string.Compare(q.Key, "deviceId", true) == 0)
+    .Value;
+
+    
+    List<IotData> iotDatas = new List<IotData>();
+    List<IotData> orderedDatas = inputTable.Where(p => p.PartitionKey == deviceId).ToList(); 
+    log.Info("count: " + orderedDatas.Count);
+    int count = 1;
+    foreach (IotData row in orderedDatas.OrderByDescending(o => o.Timestamp))
+    {
+    iotDatas.Add(row);
+    if (max > 0 && count++ >= max) 
+    {
+    break;
+    }
+    }
+
+    string jsonRet = JsonConvert.SerializeObject(iotDatas); 
+    return new HttpResponseMessage(HttpStatusCode.OK) { 
+    Content = new StringContent(jsonRet, Encoding.UTF8, "application/json")
+    };
+    }
+
+    public class IotData : TableEntity
+    {
+    public string DeviceId { get; set; }
+    public string Hum {get; set;}
+    public string Temp {get; set;}
+
+    }
+
+
 ![Datastorage](/datastorage.png)
 
 Käyttöliittymä tehtiin Reactilla Replit.com palvelussa
