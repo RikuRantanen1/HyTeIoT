@@ -182,7 +182,7 @@ Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa.
     }
 
 
-![Datastorage](/datastorage.png)
+![Datastorage](/datastorage2.png)
 
 Käyttöliittymä tehtiin Reactilla Replit.com palvelussa
 
