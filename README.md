@@ -133,6 +133,7 @@ ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille
     public string Temp { get; set; }
     }
 Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
+    
     #r "Newtonsoft.Json"
     #r "Microsoft.WindowsAzure.Storage"
     using Microsoft.WindowsAzure.Storage.Table;
