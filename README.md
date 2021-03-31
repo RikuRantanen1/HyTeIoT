@@ -135,7 +135,7 @@ ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille
 Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
 ![Datastorage](/datastorage.png)
 
-Käyttöliittymä tehtiin Reactilla Replit.com pilvipalvelussa
+Käyttöliittymä tehtiin Reactilla Replit.com palvelussa
 
     import React, { useState } from 'react';
     import './App.css';
@@ -266,7 +266,7 @@ Particle console ja Particle Web IDE
 Microsoft Azure
 Replit
 Github
-## Termihakemisto
+
 
 ## Viitteet
 https://www.empirica.fi/iot/
