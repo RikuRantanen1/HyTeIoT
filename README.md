@@ -30,19 +30,20 @@
 	
 
   ### Laitteistot
-  Particle Photon Wi-Fi module
+  **Particle Photon Wi-Fi module**
 ![Particle](/particle.png)
-  Particle P Wi-Fi module
-  Broadcom BCM43362 Wi-Fi chip
-  802.11b/g/n Wi-Fi
-  STM32F205RGY6 120Mhz ARM Cortex M3
-  1MB flash, 128KB RAM
-  On-board chip antenna (external antenna IPEX U.FL optional)
-  On-board RGB status LED (ext. drive provided)    18 Mixed-signal GPIO and advanced peripherals
-  Open source design
-  Real-time operating system (FreeRTOS)
-  Soft AP setup
-  FCC, CE ja IC certified
+  
+ - Broadcom BCM43362 Wi-Fi chip
+ - 802.11b/g/n Wi-Fi
+ - STM32F205RGY6 120Mhz ARM Cortex M3
+ - 1MB flash, 128KB RAM
+ - On-board chip antenna (external antenna IPEX U.FL optional)
+ - On-board RGB status LED (ext. drive provided)    
+ - Mixed-signal GPIO and advanced peripherals
+  - Open source design
+  - Real-time operating system (FreeRTOS)
+  - Soft AP setup
+  - FCC, CE ja IC certified
 
   ### Komponentit
   **Kuulevat sensorit:**
@@ -79,21 +80,19 @@
 
 
 
-
-
-    
-
   ### Palvelut
-  Particle console ja Particle Web IDE
-  Microsoft Azure
-  Replit
-  Github
+  Sääasema käyttää Microsoft Azure pilvipalveluja.
+
+  Pilvipalvelujen hyötyjä ovat datan helppo saatavuus ja jakaminen.
+  Melkein kaikki isommat nettipalvelut perustuvat pilvipalveluiden käyttämiseen( netflix,gmail,facebook jne)
+  Huonona puolena voisi pitää tietoturvariskejä ja yksityisyydensuojan riskejä.
+  
   ### Ohjelmointi
   Particle Web IDE:llä ladataan piiriin tarvittavat kirjastot ja ohjelmoidaan piiri mittaaman lämpöä ja kosteutta,sekä lähettämään mittaustulokset eteenpäin.
   ![particlekoodi](/pkoodi1.png)
   ![particlekoodi](/pkoodi2.png)
 
-ParticlePhotoninkonsolista tehdään Webhookkutsu Azurentriggerille 
+ParticlePhotoninkonsolista tehdään Webhookkutsu Azuren triggerille 
 
     #r "Newtonsoft.Json" 
     using System; 
@@ -133,7 +132,7 @@ ParticlePhotoninkonsolista tehdään Webhookkutsu Azurentriggerille
     public string Hum { get; set; }
     public string Temp { get; set; }
     }
-Triggertallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
+Trigger tallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
 ![Datastorage](/datastorage.png)
 
 Käyttöliittymä tehtiin Reactilla Replit.com pilvipalvelussa
@@ -260,10 +259,13 @@ Käyttöliittymä tehtiin Reactilla Replit.com pilvipalvelussa
     export default App;
 
 
-  ### Toiminta
+ 
 
 ## Käytetyt kehitysympäristöt
-
+Particle console ja Particle Web IDE
+Microsoft Azure
+Replit
+Github
 ## Termihakemisto
 
 ## Viitteet
