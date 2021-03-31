@@ -30,6 +30,20 @@
 	
 
   ### Laitteistot
+  Particle Photon Wi-Fi module
+![Particle](/particle.png)
+  Particle P Wi-Fi module
+  Broadcom BCM43362 Wi-Fi chip
+  802.11b/g/n Wi-Fi
+  STM32F205RGY6 120Mhz ARM Cortex M3
+  1MB flash, 128KB RAM
+  On-board chip antenna (external antenna IPEX U.FL optional)
+  On-board RGB status LED (ext. drive provided)    18 Mixed-signal GPIO and advanced peripherals
+  Open source design
+  Real-time operating system (FreeRTOS)
+  Soft AP setup
+  FCC, CE ja IC certified
+
   ### Komponentit
   **Kuulevat sensorit:**
   Toiminta perustuu ilmanpaineen vaihteluun.
@@ -70,7 +84,182 @@
     
 
   ### Palvelut
+  Particle console ja Particle Web IDE
+  Microsoft Azure
+  Replit
+  Github
   ### Ohjelmointi
+  Particle Web IDE:llä ladataan piiriin tarvittavat kirjastot ja ohjelmoidaan piiri mittaaman lämpöä ja kosteutta,sekä lähettämään mittaustulokset eteenpäin.
+  ![particlekoodi](/pkoodi1.png)
+  ![particlekoodi](/pkoodi2.png)
+
+ParticlePhotoninkonsolista tehdään Webhookkutsu Azurentriggerille 
+
+    #r "Newtonsoft.Json" 
+    using System; 
+    using System.Net; 
+    using System.Threading.Tasks;
+    using Newtonsoft.Json; 
+
+    public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, ICollector<DeviceDataWrapper> outputTable, TraceWriter log)
+    {
+    string deviceId = req.GetQueryNameValuePairs() 
+    .FirstOrDefault(q => string.Compare(q.Key, "deviceid", true) == 0)
+    .Value;
+    string devData = req.GetQueryNameValuePairs() 
+    .FirstOrDefault(q => string.Compare(q.Key, "data", true) == 0)
+    .Value;
+    devData = WebUtility.UrlDecode(devData); 
+    devData = devData.Replace("()", ""); 
+    devData = devData.Replace("(°C)", ""); 
+
+    DeviceDataWrapper deviceData = JsonConvert.DeserializeObject<DeviceDataWrapper>(devData); 
+    deviceData.DeviceId = deviceId; 
+
+    deviceData.PartitionKey = deviceId; 
+    log.Info("deviceData: " + deviceData); 
+    Guid id = Guid.NewGuid(); 
+    deviceData.RowKey = id.ToString(); 
+    outputTable.Add(
+    deviceData 
+    );
+
+    return req.CreateResponse(HttpStatusCode.OK, "Hello "); 
+    }
+    public class DeviceDataWrapper {
+    public string PartitionKey { get; set; }
+    public string DeviceId { get; set; }
+    public string RowKey { get; set; }
+    public string Hum { get; set; }
+    public string Temp { get; set; }
+    }
+Triggertallentaa Webhookilla tulleen datan Tablestorageen pilvipalvelussa. 
+![Datastorage](/datastorage.png)
+
+Käyttöliittymä tehtiin Reactilla Replit.com pilvipalvelussa
+
+    import React, { useState } from 'react';
+    import './App.css';
+    import Chart from "react-google-charts";
+    import Header from './components/layout/Header';
+    import Footer from './components/layout/Footer';
+    import Portfolio from './components/Portfolio';
+    import Toivomukset from './components/Toivomukset';
+    import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+    function App() {
+
+    const initWeather = [];
+
+    const [weather, setWeather] = useState(initWeather);
+
+    function convertUTCDateToLocalDate(date) {
+    new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
+    return date;
+    }
+
+    let chartHumData = [
+      ['Aika', '%',],
+      ['Loading..', 0]
+     
+    ];
+    let chartTempData = [
+      ['Aika', 'Celsius'],
+      ['Loading..', 0]
+      
+    ];
+
+    fetch('https://oppilas-5.azurewebsites.net/api/HttpTriggerCSharp2?code=9Ii7LRHZamJjN9KpyStW1VZfWYcpBmHQQ/PQaZQF4VMEbBYBeP38pQ==&deviceId=2c0031001947393035313138&amount=10')
+    .then(response => response.json())
+    .then (json => setWeather([...json]));
+
+    let humtempkey = 1;
+    const rows = () => weather.map(temphum => {
+
+    if(chartHumData[1][0] === 'Loading..'){
+    chartHumData.pop();
+    }
+    if(chartTempData[1][0] === 'Loading..'){
+    chartTempData.pop();
+    }
+
+    chartHumData.push([String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4], parseInt(temphum.Hum)])
+
+    chartTempData.push([String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4], parseInt(temphum.Temp)])
+    
+    return <div key={humtempkey++}> 
+    
+    <b>Klo</b> {String(convertUTCDateToLocalDate(new Date(temphum.Timestamp))).split(' ')[4]} <b>Lämpötila</b> {temphum.Temp}°C <b>Ilmankosteus</b> {temphum.Hum}% 
+    </div>
+    })
+  
+
+
+    return (
+    <Router>
+    <div className="App">
+    
+    <Header />
+    <Switch>
+      <Route path="/Toivomukset">
+        <Toivomukset />
+        </Route> 
+        <Route path="/portfolio">
+          <Portfolio />
+        </Route>
+        <Route path="/">
+    
+      {rows()}
+      <div className="kaavio">
+    <Chart
+    width={'100%'}
+    height={300}
+    chartType="ColumnChart"
+    loader={<div>Loading Chart</div>}
+    data={chartHumData}
+    options={{
+    title: 'Ilmankosteus',
+    chartArea: { width: '50%' },
+    hAxis: {
+    title: 'Mittausaika',
+    minValue: 0,
+    },
+    vAxis: {
+    title: '',
+    },
+    }}
+    
+    />
+    </div>
+    <div className="kaavio2">
+
+    <Chart
+    width={'100%'}
+    height={300}
+    chartType="LineChart"
+    loader={<div>Loading Chart</div>}
+    data={chartTempData}
+    options={{
+    chartArea: { width: '50%' },
+    title: 'Lämpötila',
+    vAxis: { minValue: 0 },
+      
+    }}
+    />
+    </div>
+    </Route>
+    </Switch>
+    <Footer />
+    
+    </div>
+    </Router>
+    
+    );
+    }
+
+    export default App;
+
+
   ### Toiminta
 
 ## Käytetyt kehitysympäristöt
